@@ -8,9 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,31 +17,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Endereco implements Serializable{
+public class ItemDieta implements Serializable{
 	private static final long serialVersionUID = 1L;
-	
-	//Atributos
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String logradouro;
-	private String numero;
-	private String complemento;
-	private String bairro;
-	private String cep;
+	private String nome;
+	private Double proteina;
+	private Double carboidrato;
+	private Double Calorias;
 	
-	@JsonIgnore
-	@OneToOne
-	@JoinColumn(name = "pnutricionista_id")
-	private Nutricionista nutricionista;
-	
-	@JsonIgnore
-	@OneToOne
-	@JoinColumn(name = "paciente_id")
-	private Paciente paciente;
 	
 	@ManyToOne
-	@JoinColumn(name = "cidade_id")
-	private Cidade cidade;
+	@JoinColumn(name = "dieta_id")
+	private Dieta dieta;
 	
 }

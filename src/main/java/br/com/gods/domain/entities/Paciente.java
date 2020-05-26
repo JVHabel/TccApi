@@ -1,6 +1,7 @@
 package br.com.gods.domain.entities;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import br.com.gods.domain.entities.enums.TipoSexo;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -31,8 +35,9 @@ public class Paciente implements Serializable{
 	private String cpf;
 	private String telefone;
 	private float peso;
-	private int idade;
+	private Timestamp idade;
 	private float altura;
+	private TipoSexo tipo;
 	
 	@ManyToOne
 	@JoinColumn(name = "nutricionista_id")
@@ -44,6 +49,10 @@ public class Paciente implements Serializable{
 	
 	
 	@OneToOne
+	@JoinColumn(name = "dieta_id")
+	private Dieta dieta;
+	
+	@OneToOne(mappedBy = "paciente")
 	private Endereco endereco;
 	
 	//private Sexo sexo;
